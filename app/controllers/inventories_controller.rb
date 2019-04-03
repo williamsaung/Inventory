@@ -5,6 +5,12 @@ class InventoriesController < ApplicationController
   # GET /inventories.json
   def index
     @inventories = Inventory.all
+
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @inventories.to_csv, filename: "users-#{Date.today}.csv" }
+    end
   end
 
   def search
